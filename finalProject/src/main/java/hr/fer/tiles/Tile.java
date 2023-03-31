@@ -55,7 +55,7 @@ public class Tile {
     public static Tile DiagonalCityTwoPartsTwo = new Tile(0, 2, 2, 0, top, bottom, img);
     public static Tile DiagonalCityTwoPartsThree = new Tile(2, 0, 2, 0, top, bottom, img);
 
-    public static Tile FourWayCrossroads = new Tile(1, 1, 1, 1, top, bottom, img);
+    public static Tile FourWayCrossroads = new Tile(1, 1, 1, 1, top, bottom, "fourWayCrossroads");
 
     public static Tile Marketplace = new Tile(2, 2, 2, 2, top, bottom, img);
 
