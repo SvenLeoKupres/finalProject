@@ -2,12 +2,8 @@ package hr.fer.tiles;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BaseMultiResolutionImage;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * 2 dimensions: 0 for grass, 1 for roads, 2 for cities
@@ -40,10 +36,10 @@ public class Tile {
     public static Tile CityEntranceTwo = new Tile(2, 1, 2, 2, top, bottom, img);
     public static Tile CityEntranceThree = new Tile(2, 2, 1, 2, top, bottom, img);
 
-    public static Tile DiagonalCityZero = new Tile(2, 0, 0, 2, top, bottom, img);
-    public static Tile DiagonalCityOne = new Tile(0, 2, 0, 2, top, bottom, img);
-    public static Tile DiagonalCityTwo = new Tile(0, 2, 2, 0, top, bottom, img);
-    public static Tile DiagonalCityThree = new Tile(2, 0, 2, 0, top, bottom, img);
+    public static Tile DiagonalCityZero = new Tile(2, 0, 0, 2, top, bottom, "diagonalCityZero");
+    public static Tile DiagonalCityOne = new Tile(0, 2, 0, 2, top, bottom, "diagonalCityOne");
+    public static Tile DiagonalCityTwo = new Tile(0, 2, 2, 0, top, bottom, "diagonalCityTwo");
+    public static Tile DiagonalCityThree = new Tile(2, 0, 2, 0, top, bottom, "diagonalCityThree");
 
     public static Tile DiagonalCityTurningRoadZero = new Tile(2, 1, 1, 2, top, bottom, img);
     public static Tile DiagonalCityTurningRoadOne = new Tile(1, 2, 1, 2, top, bottom, img);
@@ -57,12 +53,14 @@ public class Tile {
 
     public static Tile FourWayCrossroads = new Tile(1, 1, 1, 1, top, bottom, "fourWayCrossroads");
 
+    public static Tile Grass = new Tile(0, 0, 0, 0, top, bottom, "grass");
+
     public static Tile Marketplace = new Tile(2, 2, 2, 2, top, bottom, img);
 
-    public static Tile OneSideCityZero = new Tile(2, 0, 0, 0, top, bottom, img);
-    public static Tile OneSideCityOne = new Tile(0, 0, 0, 2, top, bottom, img);
-    public static Tile OneSideCityTwo = new Tile(0, 2, 0, 0, top, bottom, img);
-    public static Tile OneSideCityThree = new Tile(0, 0, 2, 0, top, bottom, img);
+    public static Tile OneSideCityZero = new Tile(2, 0, 0, 0, top, bottom, "oneSideCityZero");
+    public static Tile OneSideCityOne = new Tile(0, 0, 0, 2, top, bottom, "oneSideCityOne");
+    public static Tile OneSideCityTwo = new Tile(0, 2, 0, 0, top, bottom, "oneSideCityTwo");
+    public static Tile OneSideCityThree = new Tile(0, 0, 2, 0, top, bottom, "oneSideCityThree");
 
     public static Tile OneSideCityCrossroadsZero = new Tile(2, 1, 1, 1, top, bottom, img);
     public static Tile OneSideCityCrossroadsOne = new Tile(1, 1, 1, 2, top, bottom, img);
@@ -84,28 +82,28 @@ public class Tile {
     public static Tile OneSideCityTurningLeftRoadTwo = new Tile(1, 2, 1, 0, top, bottom, img);
     public static Tile OneSideCityTurningLeftRoadThree = new Tile(1, 0, 2, 1, top, bottom, img);
 
-    public static Tile RoadStraightZero = new Tile(1, 1, 0, 0, top, bottom, img);
-    public static Tile RoadStraightOne = new Tile(0, 0, 1, 1, top, bottom, img);
+    public static Tile RoadStraightZero = new Tile(1, 1, 0, 0, top, bottom, "roadStraightZero");
+    public static Tile RoadStraightOne = new Tile(0, 0, 1, 1, top, bottom, "roadStraightOne");
 
-    public static Tile RoadTurningZero = new Tile(1, 0, 0, 1, top, bottom, img);
-    public static Tile RoadTurningOne = new Tile(0, 1, 0, 1, top, bottom, img);
-    public static Tile RoadTurningTwo = new Tile(0, 1, 1, 0, top, bottom, img);
-    public static Tile RoadTurningThree = new Tile(1, 0, 1, 0, top, bottom, img);
+    public static Tile RoadTurningZero = new Tile(1, 0, 0, 1, top, bottom, "roadTurningZero");
+    public static Tile RoadTurningOne = new Tile(0, 1, 0, 1, top, bottom, "roadTurningOne");
+    public static Tile RoadTurningTwo = new Tile(0, 1, 1, 0, top, bottom, "roadTurningTwo");
+    public static Tile RoadTurningThree = new Tile(1, 0, 1, 0, top, bottom, "roadTurningThree");
 
     public static Tile StartTileZero = new Tile(2, 0, 1, 1, top, bottom, img);
     public static Tile StartTileOne = new Tile(1, 1, 0, 2, top, bottom, img);
     public static Tile StartTileTwo = new Tile(0, 2, 1, 1, top, bottom, img);
     public static Tile StartTileThree = new Tile(1, 1, 2, 0, top, bottom, img);
 
-    public static Tile ThreeSidesCityZero = new Tile(2, 0, 2, 2, top, bottom, img);
-    public static Tile ThreeSidesCityOne = new Tile(2, 2, 0, 2, top, bottom, img);
-    public static Tile ThreeSidesCityTwo = new Tile(0, 2, 2, 2, top, bottom, img);
-    public static Tile ThreeSidesCityThree = new Tile(2, 2, 2, 0, top, bottom, img);
+    public static Tile ThreeSidesCityZero = new Tile(2, 0, 2, 2, top, bottom, "threeSidesCityZero");
+    public static Tile ThreeSidesCityOne = new Tile(2, 2, 0, 2, top, bottom, "threeSidesCityOne");
+    public static Tile ThreeSidesCityTwo = new Tile(0, 2, 2, 2, top, bottom, "threeSidesCityTwo");
+    public static Tile ThreeSidesCityThree = new Tile(2, 2, 2, 0, top, bottom, "threeSidesCityThree");
 
-    public static Tile ThreeWayCrossroadsZero = new Tile(0, 1, 1, 1, top, bottom, img);
-    public static Tile ThreeWayCrossroadsOne = new Tile(1, 1, 1, 0, top, bottom, img);
-    public static Tile ThreeWayCrossroadsTwo = new Tile(1, 0, 1, 1, top, bottom, img);
-    public static Tile ThreeWayCrossroadsThree = new Tile(1, 1, 0, 1, top, bottom, img);
+    public static Tile ThreeWayCrossroadsZero = new Tile(0, 1, 1, 1, top, bottom, "threeWayCrossroadsZero");
+    public static Tile ThreeWayCrossroadsOne = new Tile(1, 1, 1, 0, top, bottom, "threeWayCrossroadsOne");
+    public static Tile ThreeWayCrossroadsTwo = new Tile(1, 0, 1, 1, top, bottom, "threeWayCrossroadsTwo");
+    public static Tile ThreeWayCrossroadsThree = new Tile(1, 1, 0, 1, top, bottom, "threeWayCrossroadsThree");
 
     public Tile(int north, int south, int west, int east, int top, int bottom, String img) {
         this.north = north;
