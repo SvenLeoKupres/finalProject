@@ -76,6 +76,12 @@ public class Frame {
         return height;
     }
 
+    public Tile getTile(int row, int column){
+        if (row<0 || row>=height || column<0 || column>=width) throw new IllegalArgumentException();
+
+        return frame[row][column];
+    }
+
     public Tile[][] getFrame(){
         Tile[][] copy=new Tile[height][width];
         for (int k=0; k<height; ++k){
