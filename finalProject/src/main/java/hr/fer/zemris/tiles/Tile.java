@@ -1,4 +1,4 @@
-package hr.fer.tiles;
+package hr.fer.zemris.tiles;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -1,0 +1,86 @@
+package hr.fer.zemris;
+
+import hr.fer.zemris.tiles.Tile;
+import hr.fer.zemris.wave_function_collapse.Algorithm;
+
+public class Frame {
+    private final int width;
+    private final int height;
+    private final Tile[][] frame;
+    private final Frame prevFrame;
+    private boolean done = false;
+    private Algorithm algorithm = new Algorithm(this);
+
+    public Frame(int width, int height, Frame prevFrame){
+        this.width=width;
+        this.height=height;
+        frame = new Tile[height][width];
+        this.prevFrame=prevFrame;
+
+        while (!done){
+            createFrame();
+        }
+    }
+
+    private void createFrame(){
+        Algorithm algorithm = new Algorithm(this);
+        while (!algorithm.done()){
+            algorithm.step();
+        }
+    }
+
+    public void addTile(Tile tile, int row, int column, boolean ignoreAnimation){
+        if (!respectsRules(tile, row, column, ignoreAnimation)) throw new IllegalArgumentException();
+
+        frame[row][column]=tile;
+    }
+
+    private boolean respectsRules(Tile tile, int row, int column, boolean ignoreAnimation){
+        if (row<0 || row>=height || column<0 || column>=width) return false;
+
+        Tile tileLeft=null, tileRight=null, tileUp=null, tileDown=null, tilePrev=null;
+        if (prevFrame!=null && !ignoreAnimation) tilePrev=prevFrame.getFrame()[row][column];
+        if (row!=0) tileUp=frame[row-1][column];
+        if (row!=height-1) tileDown=frame[row+1][column];
+        if (column!=0) tileLeft=frame[row][column-1];
+        if (column!=width-1) tileRight=frame[row][column+1];
+
+        if (tilePrev!=null){
+            if (tilePrev.getTop()!=tile.getBottom()) return false;
+        }
+        if (tileUp!=null){
+            if (tileUp.getSouth()!=tile.getNorth()) return false;
+        }
+        if (tileDown!=null){
+            if (tileDown.getNorth()!=tile.getSouth()) return false;
+        }
+        if (tileLeft!=null){
+            if (tileLeft.getEast()!=tile.getWest()) return false;
+        }
+        if (tileRight!=null){
+            return tileRight.getWest() == tile.getEast();
+        }
+
+        return true;
+    }
+
+    public boolean done(){
+        return done;
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public Tile[][] getFrame(){
+        Tile[][] copy=new Tile[height][width];
+        for (int k=0; k<height; ++k){
+            System.arraycopy(frame[k], 0, copy[k], 0, width);
+        }
+        return copy;
+    }
+}

@@ -1,10 +1,10 @@
-package hr.fer;
+package hr.fer.zemris;
 
 public class Animation {
-    private Frame[] frames;
+    private final Frame[] frames;
     private int lastFrameIndex = 0;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public Animation(int noOfFrames, int width, int height){
         frames=new Frame[noOfFrames];
