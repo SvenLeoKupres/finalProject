@@ -4,11 +4,11 @@ import hr.fer.zemris.Frame;
 
 public class Algorithm {
     private final Frame frame;
-    private final int[][] possibilities;
+    private final long[][] possibilities;
     private boolean done=false;
     public Algorithm(Frame frame){
         this.frame=frame;
-        possibilities=new int[frame.getHeight()][frame.getWidth()];
+        possibilities=new long[frame.getHeight()][frame.getWidth()];
     }
 
     public boolean done(){

@@ -7,6 +7,8 @@ public class Animation {
     private final int height;
 
     public Animation(int noOfFrames, int width, int height){
+        if (noOfFrames<=0) throw new IllegalArgumentException();
+
         frames=new Frame[noOfFrames];
         this.width = width;
         this.height = height;
@@ -20,5 +22,13 @@ public class Animation {
 
     public boolean done(){
         return lastFrameIndex==frames.length;
+    }
+
+    public Frame[] getFrames(){
+        Frame[] framesCopy=new Frame[lastFrameIndex];
+
+        System.arraycopy(frames, 0, framesCopy, 0, lastFrameIndex);
+
+        return framesCopy;
     }
 }
