@@ -8,7 +8,7 @@ public class Frame {
     private final int height;
     private final Tile[][] frame;
     private final Frame prevFrame;
-    private Algorithm algorithm = new Algorithm(this);
+    private final Algorithm algorithm;
 
     public Frame(int width, int height, Frame prevFrame){
         this.width=width;
@@ -16,11 +16,12 @@ public class Frame {
         frame = new Tile[height][width];
         this.prevFrame=prevFrame;
 
+        algorithm = new Algorithm(this);
+
         createFrame();
     }
 
     private void createFrame(){
-        Algorithm algorithm = new Algorithm(this);
         while (!algorithm.done()){
             algorithm.step();
         }
