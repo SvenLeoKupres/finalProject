@@ -14,6 +14,7 @@ public class Algorithm {
     private final List<Tile> tileList = Tile.initializeList();
     private Frame bestFrame;
     private boolean ignoreAnimation=false;
+    private Combination combination;
     public Algorithm(Frame frame){
         this.frames.push(frame);
 
