@@ -33,7 +33,7 @@ public class Frame {
         frame[row][column]=tile;
     }
 
-    private boolean respectsRules(Tile tile, int row, int column, boolean ignoreAnimation){
+    public boolean respectsRules(Tile tile, int row, int column, boolean ignoreAnimation){
         if (row<0 || row>=height || column<0 || column>=width) return false;
 
         Tile tileLeft=null, tileRight=null, tileUp=null, tileDown=null, tilePrev=null;
@@ -83,4 +83,5 @@ public class Frame {
         }
         return copy;
     }
+
 }
