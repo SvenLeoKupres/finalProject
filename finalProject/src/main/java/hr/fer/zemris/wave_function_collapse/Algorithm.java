@@ -3,7 +3,6 @@ package hr.fer.zemris.wave_function_collapse;
 import hr.fer.zemris.Frame;
 import hr.fer.zemris.tiles.Tile;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Stack;
 
