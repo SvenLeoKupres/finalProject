@@ -33,4 +33,8 @@ public class Combination {
         this.possibilitiesStack=possibilitiesStack;
     }
 
+    public void collapseSuperposition(){}
+
+    public void revertSuperposition(){}
+
 }
