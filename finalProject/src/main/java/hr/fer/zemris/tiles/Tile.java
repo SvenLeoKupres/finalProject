@@ -18,6 +18,7 @@ public class Tile {
     private final int east;
     private final int top;
     private final int bottom;
+    private final String name;
     private final BufferedImage img;
 
     private static final Tile AcrossCityZero =  new Tile(2, 2, 0, 0, 0, 0, "acrossCityZero");
@@ -188,6 +189,8 @@ public class Tile {
         this.top = top;
         this.bottom = bottom;
 
+        this.name=img;
+
         try {
             String path="./src/main/resources/"+img + ".png";
             this.img = ImageIO.read(new File(path));
@@ -216,6 +219,11 @@ public class Tile {
     }
     public Image getImg(){
         return img;
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
     }
 
 }

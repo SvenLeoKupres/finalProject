@@ -1,30 +1,44 @@
 package hr.fer.zemris;
 
 import hr.fer.zemris.tiles.Tile;
-import hr.fer.zemris.wave_function_collapse.Algorithm;
+import hr.fer.zemris.wave_function_collapse.Algorithm2;
 
 public class Frame {
     private final int width;
     private final int height;
-    private final Tile[][] frame;
+    private Tile[][] frame;
     private final Frame prevFrame;
-    private final Algorithm algorithm;
+    private final Algorithm2 algorithm;
 
     public Frame(int width, int height, Frame prevFrame){
+        this(width, height, prevFrame, null, null);
+
+    }
+
+    private Frame(int width, int height, Frame prevFrame, Algorithm2 algorithm, Tile[][] frame){
         this.width=width;
         this.height=height;
-        frame = new Tile[height][width];
         this.prevFrame=prevFrame;
 
-        algorithm = new Algorithm(this);
+        this.frame=new Tile[height][width];
 
-        createFrame();
+        if (frame!=null) {
+            for (int k=0; k<frame.length; ++k){
+                System.arraycopy(frame[k], 0, this.frame[k], 0, frame[k].length);
+            }
+        }
+
+        this.algorithm = (algorithm==null) ? new Algorithm2(this) : algorithm;
+
+        if (algorithm==null) createFrame();
     }
 
     private void createFrame(){
+        Tile[][] tmp=null;
         while (!algorithm.done()){
-            algorithm.step();
+            tmp=algorithm.step();
         }
+        this.frame=tmp;
     }
 
     public void addTile(Tile tile, int row, int column, boolean ignoreAnimation){
@@ -47,16 +61,17 @@ public class Frame {
             if (tilePrev.getTop()!=tile.getBottom()) return false;
         }
         if (tileUp!=null){
-            if (tileUp.getSouth()!=tile.getNorth()) return false;
+            if (tileUp.getSouth()!=tile.getNorth() || tileUp.equals(tile)) return false;
         }
         if (tileDown!=null){
-            if (tileDown.getNorth()!=tile.getSouth()) return false;
+            if (tileDown.getNorth()!=tile.getSouth() || tileDown.equals(tile)) return false;
         }
         if (tileLeft!=null){
-            if (tileLeft.getEast()!=tile.getWest()) return false;
+            if (tileLeft.getEast()!=tile.getWest() || tileLeft.equals(tile)) return false;
         }
         if (tileRight!=null){
-            return tileRight.getWest() == tile.getEast();
+            return tileRight.getWest() == tile.getEast() && !tileRight.equals(tile);
+            //return tileRight.getWest() == tile.getEast() || !tileRight.equals(tile);
         }
 
         return true;
@@ -82,6 +97,10 @@ public class Frame {
             System.arraycopy(frame[k], 0, copy[k], 0, width);
         }
         return copy;
+    }
+
+    public Frame copy(){
+        return new Frame(this.width, this.height, this.prevFrame, algorithm, frame);
     }
 
 }
