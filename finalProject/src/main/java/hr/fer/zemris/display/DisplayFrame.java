@@ -77,11 +77,13 @@ public class DisplayFrame extends JFrame {
 
                 setSize(100*colCount, 100*rowCount+30);
 
-                File outputfile = new File("./frame"+(frameCount-1)+".png");
-                try {
-                    ImageIO.write(animationDisplay[frameCount-1].getImg(), "png", outputfile);
-                } catch (IOException ex) {
-                    //throw new RuntimeException(ex);
+                for (int k=0; k<frameCount; ++k) {
+                    File outputfile = new File("./frame"+k+".png");
+                    try {
+                        ImageIO.write(animationDisplay[k].getImg(), "png", outputfile);
+                    } catch (IOException ex) {
+                        //throw new RuntimeException(ex);
+                    }
                 }
 
             }
