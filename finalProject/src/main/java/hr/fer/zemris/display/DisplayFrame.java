@@ -32,9 +32,9 @@ public class DisplayFrame extends JFrame {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new GridLayout(1,3));
 
-        textPanel.add(noOfFrames);
-        textPanel.add(noOfRows);
-        textPanel.add(noOfCols);
+        textPanel.add("frame count", noOfFrames);
+        textPanel.add("row count", noOfRows);
+        textPanel.add("column count", noOfCols);
 
         getContentPane().add(textPanel);
 
@@ -49,7 +49,7 @@ public class DisplayFrame extends JFrame {
 
                 if (frameCount<=0 || rowCount<=0 || colCount<=0) throw new IllegalArgumentException();
 
-                Animation animation=new Animation(frameCount, rowCount, colCount);
+                Animation animation=new Animation(frameCount, colCount, rowCount);
                 int frameNo=1;
                 while (!animation.done()){
                     animation.newFrame();
@@ -87,7 +87,9 @@ public class DisplayFrame extends JFrame {
                 }
 
             }
-            catch (RuntimeException ignored){}
+            catch (RuntimeException ex){
+                System.out.println("Doslo je do greske");
+            }
 
             noOfFrames.setValue(0);
             noOfRows.setValue(0);

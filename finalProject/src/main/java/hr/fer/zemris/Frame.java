@@ -12,7 +12,6 @@ public class Frame {
 
     public Frame(int width, int height, Frame prevFrame){
         this(width, height, prevFrame, null, null);
-
     }
 
     private Frame(int width, int height, Frame prevFrame, Algorithm2 algorithm, Tile[][] frame){
