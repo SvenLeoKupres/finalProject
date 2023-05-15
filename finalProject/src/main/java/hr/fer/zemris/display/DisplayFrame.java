@@ -1,13 +1,16 @@
 package hr.fer.zemris.display;
 
+import com.squareup.gifencoder.FloydSteinbergDitherer;
+import com.squareup.gifencoder.GifEncoder;
+import com.squareup.gifencoder.ImageOptions;
 import hr.fer.zemris.Animation;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class DisplayFrame extends JFrame {
     JSpinner noOfFrames = new JSpinner();
@@ -68,15 +71,19 @@ public class DisplayFrame extends JFrame {
                     //images[k]=animationDisplay[k].getImg();
                 }
 
-                setTitle("Last animation frame");
+                //setTitle("Last animation frame");
                 //JScrollPane scrollPane = new JScrollPane();
                 //scrollPane.setLayout(new BorderLayout());
                 //getContentPane().add(scrollPane);
                 //scrollPane.add(animationDisplay[frameCount-1]);
-                getContentPane().add(animationDisplay[frameCount-1]);
+                //getContentPane().add(animationDisplay[frameCount-1]);
 
-                setSize(100*colCount, 100*rowCount+30);
+                //setSize(100*colCount, 100*rowCount+30);
+                //noOfFrames.setValue(0);
+                //noOfRows.setValue(0);
+                //noOfCols.setValue(0);
 
+                /*
                 for (int k=0; k<frameCount; ++k) {
                     File outputfile = new File("./frame"+k+".png");
                     try {
@@ -85,16 +92,47 @@ public class DisplayFrame extends JFrame {
                         //throw new RuntimeException(ex);
                     }
                 }
+                 */
+
+                try (FileOutputStream outputStream = new FileOutputStream("animation.gif")) {
+                    ImageOptions options = new ImageOptions();
+
+                    //Set delay between each frame
+                    options.setDelay(1, TimeUnit.SECONDS);
+                    //Use Floyd Steinberg dithering as it yields the best quality
+                    options.setDitherer(FloydSteinbergDitherer.INSTANCE);
+
+                    GifEncoder encoder = new GifEncoder(outputStream, 100*colCount, 100*rowCount, 0);
+
+                    for (int k=0; k<frameCount; ++k){
+                        encoder.addImage(convertImageToArray(animationDisplay[k].getImg()), options);
+                    }
+                    encoder.finishEncoding();
+
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 
             }
             catch (RuntimeException ex){
                 System.out.println("Doslo je do greske");
             }
 
-            noOfFrames.setValue(0);
-            noOfRows.setValue(0);
-            noOfCols.setValue(0);
+            System.exit(0);
         });
+    }
+
+    /**
+     * Convert BufferedImage into RGB pixel array
+     */
+    public int[][] convertImageToArray(BufferedImage image) throws IOException {
+        int[][] rgbArray = new int[image.getHeight()][image.getWidth()];
+        for (int i = 0; i < image.getHeight(); i++) {
+            for (int j = 0; j < image.getWidth(); j++) {
+                rgbArray[i][j] = image.getRGB(j, i);
+            }
+        }
+        return rgbArray;
     }
 
     public static void main(String[] args){
