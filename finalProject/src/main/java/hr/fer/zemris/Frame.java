@@ -3,6 +3,12 @@ package hr.fer.zemris;
 import hr.fer.zemris.tiles.Tile;
 import hr.fer.zemris.wave_function_collapse.Algorithm2;
 
+/**
+ * Defines a single frame of the animation<br>
+ * Uses a two-dimensional array, the size of which is n x m, where n is the number of rows
+ * and m is the number of columns
+ *
+ */
 public class Frame {
     private final int width;
     private final int height;
@@ -10,6 +16,12 @@ public class Frame {
     private final Frame prevFrame;
     private final Algorithm2 algorithm;
 
+    /**
+     * Creates a new Frame
+     * @param width number of columns in the frame
+     * @param height number of rows in the frame
+     * @param prevFrame previous frame in the animation, <code>null</code> if this is the first frame
+     */
     public Frame(int width, int height, Frame prevFrame){
         this(width, height, prevFrame, null, null);
     }
@@ -32,6 +44,9 @@ public class Frame {
         if (algorithm==null) createFrame();
     }
 
+    /**
+     * constructs the frame using
+     */
     private void createFrame(){
         Tile[][] tmp=null;
         while (!algorithm.done()){

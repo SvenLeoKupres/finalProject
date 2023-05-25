@@ -7,9 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 /**
- * 2 dimensions: 0 for grass, 1 for roads, 2 for cities
- * 3. dimensions: 0 no rules
+ * Defines the appearance and behaviour of a tile. For each side of the tile, defines a number -
+ * only tiles with a corresponding number on their opposite side can be placed next to it.<br>
+ * For instance, if a tile has the number 0 for their north side, only tiles with the tile number 0 on their south side
+ * can be placed above it, and <i>vice versa</i>
+ *
  */
 public class Tile {
     private final int north;
@@ -108,6 +112,10 @@ public class Tile {
     private static final Tile ThreeWayCrossroadsTwo = new Tile(1, 0, 1, 1, 0, 0, "threeWayCrossroadsTwo");
     private static final Tile ThreeWayCrossroadsThree = new Tile(1, 1, 0, 1, 0, 0, "threeWayCrossroadsThree");
 
+    /**
+     *
+     * @return a list of all the defined tiles
+     */
     public static java.util.List<Tile> initializeList() {
         java.util.List<Tile> tileList = new ArrayList<>();
         tileList.add(AcrossCityZero);
@@ -180,6 +188,17 @@ public class Tile {
         return tileList;
     }
 
+    /**
+     * Creates a new instance of Tile
+     * @param north number which determines which tiles can go above this tile
+     * @param south number which determines which tiles can go below this tile
+     * @param west number which determines which tiles can go right of this tile
+     * @param east number which determines which tiles can go left this tile
+     * @param top number which determines which tiles can go after this tile in the animation
+     * @param bottom number which determines which tiles can go before this tile in the animation
+     * @param img name of the corresponding .png image. The constructor attempts to load the file as a BufferedImage,
+     *            but throws <code>RuntimeException</code> if no image with given name exists
+     */
     public Tile(int north, int south, int west, int east, int top, int bottom, String img) {
         this.north = north;
         this.south = south;
