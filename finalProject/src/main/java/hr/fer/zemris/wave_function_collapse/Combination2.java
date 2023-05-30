@@ -18,8 +18,8 @@ public class Combination2 {
             this.columnNo=columnNo;
         }
     }
-    private Pair pair=new Pair(-1, -1);
-    private final BigInteger[][] possibility;
+    private final Pair pair;
+    private BigInteger[][] possibility;
     private final int tileNo;
     private final Frame frame;
 
@@ -76,4 +76,7 @@ public class Combination2 {
         return frame;
     }
 
+    void setPossibility(BigInteger[][] possibility) {
+        this.possibility = possibility;
+    }
 }
