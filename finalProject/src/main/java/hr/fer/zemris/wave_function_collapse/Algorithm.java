@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Stack;
 
+@Deprecated
 public class Algorithm {
     private final Stack<Frame> frames = new Stack<>();
     private final Stack<BigInteger[][]> possibilitiesStack=new Stack<>();

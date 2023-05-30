@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Stack;
 
+@Deprecated
 public class Combination {
     private static class Pair{
         public int rowNo;

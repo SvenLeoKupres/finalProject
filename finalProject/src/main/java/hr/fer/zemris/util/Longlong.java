@@ -1,5 +1,6 @@
 package hr.fer.zemris.util;
 
+@Deprecated
 public class Longlong {
     private long upper;
     private long lower;

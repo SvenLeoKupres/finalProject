@@ -2,14 +2,11 @@ package hr.fer.zemris.display;
 
 import hr.fer.zemris.tiles.Tile;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 
+@Deprecated
 public class ImagePanel extends JComponent {
 
     private final int rowCount;
